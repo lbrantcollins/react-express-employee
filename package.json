@@ -1,0 +1,26 @@
+{
+  "name": "react-express-employee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbrantcollins/react-express-employee.git"
+  },
+  "author": "Brant Collins and Sebastian Portuondo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lbrantcollins/react-express-employee/issues"
+  },
+  "homepage": "https://github.com/lbrantcollins/react-express-employee#readme",
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-create-app": "^2.0.6",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3",
+    "typescript": "^3.5.3"
+  }
+}
