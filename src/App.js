@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CreateEmployee from './CreateEmployee';
+import ListEmployees from './ListEmployees';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+   constructor() {
+      super();
+
+      this.state = {
+         employees: []
+      }
+   }
+
+   // CREATE: Sebastian
+   addEmployee = (employee, e) => {
+      
+   }
+
+   // READ: Brant
+   getEmployees = () => {
+      
+   }
+
+   render() {
+
+      return (
+
+         <div className="App">
+
+            {/* CREATE: Sebastian */}
+            <CreateEmployee addEmployee={this.addEmployee}/>
+
+            {/* READ: Brant */}
+            <ListEmployees employees={this.state.employees}/>
+
+         </div>
+
+        );
+
+   }
 }
+
 
 export default App;
