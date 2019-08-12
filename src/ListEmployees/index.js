@@ -1,24 +1,26 @@
 import React from 'react';
 
 const ListEmployees = (props) => {
-
+	console.log(props, ' < props passed in to ListEmployees');
 	const employeeList = props.employees.map((employee) => {
 
 		return (
-			<li key={employee._id}>
-				<span>Employee list will be here</span>
+			<li >
+				<span>Name: {employee.name}</span>
+				<span>Position: {employee.position}</span>
+				<span>Birth date: {employee.birthDate}</span>
+				<span>Department: {employee.department}</span>
+				<span>Salary: {employee.annualSalary}</span>
 			</li>
 		);
 
 	})
 
 	return (
-	<ul>
-		{employeeList}
-	</ul>
+		<ul>
+			{employeeList}
+		</ul>
 	);
-
-
 }
 
 export default ListEmployees;

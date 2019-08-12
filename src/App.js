@@ -17,7 +17,7 @@ class App extends React.Component {
       console.log(employee, e, 'Inside of addEmployee');
 
       try {
-        const createEmployee = await fetch('http://localhost9000/api/v1/employees', {
+        const createEmployee = await fetch('http://localhost:9000/api/v1/employees', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(employee),
@@ -27,11 +27,12 @@ class App extends React.Component {
         })
         console.log(createEmployee, '<<< fetched createEmployee');
 
-        if (createEmployee.status !== 200) {
+        if (createEmployee.status !== 201) {
+          console.log(createEmployee.status);
           throw Error('Resource not found...')
         }
 
-        const createEmployeeResponse = createEmployee.json();
+        const createEmployeeResponse = await createEmployee.json();
 
         this.setState({
           employees: [...this.state.employees, createEmployeeResponse.data]
@@ -53,10 +54,10 @@ class App extends React.Component {
        const responseGetEmployees = await fetch('http://localhost:9000/api/v1/employees');
        console.log(responseGetEmployees, ' responseGetEmployees');
 
-       if (responseGetEmployees.status != 200) {
+       if (responseGetEmployees.status !== 200) {
           throw Error('404 from server');
        }
-       
+
        const employeesResponse = await responseGetEmployees.json();
        console.log(employeesResponse, 'employeesResponse');
 
