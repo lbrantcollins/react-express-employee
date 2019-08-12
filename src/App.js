@@ -17,7 +17,29 @@ class App extends React.Component {
    }
 
    // READ: Brant
-   getEmployees = () => {
+   getEmployees = async () => {
+
+      try {
+
+         const responseGetEmployees = await fetch('http://localhost:9000/api/v1/employees');
+         console.log(responseGetEmployees, ' responseGetEmployees');
+
+         if (responseGetEmployees.status != 200) {
+            throw Error('404 from server');
+         }
+         
+         const employeesResponse = await responseGetEmployees.json();
+         console.log(employeesResponse, 'employeesResponse');
+
+         this.setState({
+            employees: [...employeesResponse.data]
+         })
+
+      } catch(err) {
+         console.log(err, "getEmployess error");
+         return err;
+      }
+
       
    }
 

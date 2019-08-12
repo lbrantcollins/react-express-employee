@@ -1,19 +1,16 @@
 import React from 'react';
 
-class ListEmployees extends React.Component {
-	constructor() {
-		super();
-	}
+const ListEmployees = (props) => {
 
-	render() {
+	const employeeList = props.employees.map(employee) => {
 
 		return (
-			<div>
-				<p>List employees here!</p>
-			</div>
+			<li key={employee_.id}>
+				<span>{}
 		);
 
 	}
+
 
 }
 
