@@ -71,6 +71,42 @@ class App extends React.Component {
     }
   }
 
+  editEmployee = async (id, e) => {
+    e.preventDefault();
+    console.log("inside editEmployee");
+  }
+
+  deleteEmployee = async (id, e) => {
+    e.preventDefault(); 
+
+    try {
+        const deletedEmployee = await fetch('http://localhost:9000/api/v1/employees/' + id, {
+            method: 'DELETE',
+            credentials: 'include',
+        })
+        console.log(deletedEmployee, '<<< fetched deletedEmployee');
+
+        if (deletedEmployee.status !== 200) {
+          console.log(deletedEmployee.status);
+          throw Error('Resource not found...')
+        }
+
+        const deletedEmployeeResponse = await deletedEmployee.json();
+        console.log("deletedEmployeeResponse");
+        console.log(deletedEmployeeResponse);
+
+      
+        this.setState({
+          employees: this.state.employees.filter((employee) => employee._id !== id)
+        })
+
+
+      } catch (err) {
+        console.log('Inside of deleteEmployee: ', err);
+        return err
+      }
+    
+  }
 
    render() {
 
@@ -78,11 +114,12 @@ class App extends React.Component {
 
          <div className="App">
 
-            {/* CREATE: Sebastian */}
-            <CreateEmployee addEmployee={this.addEmployee}/>
 
             {/* READ: Brant */}
-            <ListEmployees employees={this.state.employees}/>
+            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} editEmployee={this.editEmployee}/>
+
+            {/* CREATE: Sebastian */}
+            <CreateEmployee addEmployee={this.addEmployee} />
 
          </div>
 
