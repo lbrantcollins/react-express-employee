@@ -11,6 +11,10 @@ class App extends React.Component {
       }
    }
 
+   componentDidMount(){
+    this.getEmployees();
+  }
+
    // CREATE: Sebastian
    addEmployee = async (employee, e) => {
       e.preventDefault();

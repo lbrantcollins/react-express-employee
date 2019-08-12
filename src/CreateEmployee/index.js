@@ -9,7 +9,7 @@ class CreateEmployee extends React.Component {
 			position: '',
 			birthDate: '',
 			department: '',
-			annualSalary: 0
+			annualSalary: null
 		}
 	}
 
