@@ -28,12 +28,18 @@ class Register extends Component {
         'Content-Type': 'application/json'
       }
     });
+    console.log("register: --------------------");
+    console.log(register);
 
     const parsedRegister = await register.json();
-    console.log(parsedRegister, ' response from register');
-    if( parsedRegister.status.message.includes('successfully registered') ){
+    console.log("parsedRegister: --------------------");
+    console.log(parsedRegister);
+
+    if( parsedRegister.message.includes('successfully registered') ){
       console.log('registered and logged in')
+      {this.props.loginStatus()}
     }
+
   }
 
   render(){

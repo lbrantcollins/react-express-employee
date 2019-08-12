@@ -31,9 +31,14 @@ class Login extends Component {
 
     const parsedLogin = await login.json();
     console.log(parsedLogin, ' response from login');
-    if( parsedLogin.status.message.includes('logged in') ){
+    
+    if( parsedLogin.message.includes('logged in') ){
       console.log('logged in')
+      {this.props.loginStatus()}
     }
+
+    
+
   }
 
   render(){
@@ -49,7 +54,7 @@ class Login extends Component {
         <input type="text" name='password' onChange={this.handleChange}/>
       </label>
       <button type='Submit'>
-        Register
+        Login
       </button>
      </form>
    	);

@@ -2,6 +2,9 @@ import React from 'react';
 import CreateEmployee from './CreateEmployee';
 import ListEmployees from './ListEmployees';
 import EditEmployee from './EditEmployee'
+import Register from './Register'
+import Login from './Login'
+
 
 class App extends React.Component {
    constructor() {
@@ -178,19 +181,42 @@ class App extends React.Component {
 
   }
 
+  loginStatus = () => {
+    console.log("inside loginStatus");
+    console.log("this.state.loggedIn ", this.state.loggedIn);
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
+  }
+
    render() {
+
+    console.log("this.state.loggedIn in render ", this.state.loggedIn);
 
       return (
 
          <div className="App">
 
-           {/* CREATE: Sebastian */}
-           <CreateEmployee addEmployee={this.addEmployee} />
+         {this.state.loggedIn 
 
-            {/* READ: Brant */}
+          ? (
+            <div>
+            <CreateEmployee addEmployee={this.addEmployee} />
+
             <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} showEditModal={this.showEditModal}/>
 
             {this.state.editModalVisible ? <EditEmployee employeeToEdit={this.state.employeeToEdit} editEmployee={this.editEmployee}  handleFormChange= {this.handleFormChange}/> : null}
+            </div>
+            )
+          :
+
+          <div>
+          <Login loginStatus={this.loginStatus}/>
+          <Register loginStatus={this.loginStatus}/>
+          </div>
+
+        }
+
 
 
 
