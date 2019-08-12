@@ -13,7 +13,7 @@ class App extends React.Component {
 
    // CREATE: Sebastian
    addEmployee = async (employee, e) => {
-      e.preventDefault
+      e.preventDefault();
       console.log(employee, e, 'Inside of addEmployee');
 
       try {
@@ -48,26 +48,27 @@ class App extends React.Component {
 
    getEmployees = async () => {
 
-      try {
+    try {
 
-         const responseGetEmployees = await fetch('http://localhost:9000/api/v1/employees');
-         console.log(responseGetEmployees, ' responseGetEmployees');
+       const responseGetEmployees = await fetch('http://localhost:9000/api/v1/employees');
+       console.log(responseGetEmployees, ' responseGetEmployees');
 
-         if (responseGetEmployees.status != 200) {
-            throw Error('404 from server');
-         }
-         
-         const employeesResponse = await responseGetEmployees.json();
-         console.log(employeesResponse, 'employeesResponse');
+       if (responseGetEmployees.status != 200) {
+          throw Error('404 from server');
+       }
+       
+       const employeesResponse = await responseGetEmployees.json();
+       console.log(employeesResponse, 'employeesResponse');
 
-         this.setState({
-            employees: [...employeesResponse.data]
-         })
+       this.setState({
+          employees: [...employeesResponse.data]
+       })
 
-      } catch(err) {
-         console.log(err, "getEmployess error");
-         return err;
-      }
+    } catch(err) {
+       console.log(err, "getEmployess error");
+       return err;
+    }
+  }
 
 
    render() {

@@ -15,7 +15,7 @@ class CreateEmployee extends React.Component {
 
 	updateEmployee = (e) => {
 		this.setState({
-			e.currentTarget.name : e.currentTarget.value
+			[e.currentTarget.name] : e.currentTarget.value
 		})
 	}
 
