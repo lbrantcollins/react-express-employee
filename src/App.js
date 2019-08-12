@@ -7,7 +7,8 @@ class App extends React.Component {
       super();
 
       this.state = {
-         employees: []
+         employees: [],
+         loggedIn: false
       }
    }
 
@@ -119,11 +120,13 @@ class App extends React.Component {
          <div className="App">
 
 
-            {/* READ: Brant */}
-            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} editEmployee={this.editEmployee}/>
-
             {/* CREATE: Sebastian */}
             <CreateEmployee addEmployee={this.addEmployee} />
+
+            {/* READ and DELETE: Brant */}
+            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} editEmployee={this.editEmployee}/>
+
+            
 
          </div>
 
