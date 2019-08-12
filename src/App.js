@@ -1,13 +1,23 @@
 import React from 'react';
 import CreateEmployee from './CreateEmployee';
 import ListEmployees from './ListEmployees';
+import EditEmployee from './EditEmployee'
 
 class App extends React.Component {
    constructor() {
       super();
 
       this.state = {
-         employees: []
+         employees: [],
+         editModalVisible: false,
+         employeeToEdit: {
+           _id: null,
+           name: '',
+           position: '',
+           birthDate: '',
+           department: '',
+           salary: null
+         }
       }
    }
 
@@ -75,13 +85,65 @@ class App extends React.Component {
     }
   }
 
-  editEmployee = async (id, e) => {
+  //UPDATE
+  handleFormChange = (e) => {
+    this.setState({
+      employeeToEdit: {
+      ...this.state.employeeToEdit,
+      [e.target.name] : e.target.value
+      }
+    })
+  }
+
+  showEditModal = (employee) => {
+    console.log('Edit modal now true');
+    this.setState({
+      employeeToEdit: employee,
+      editModalVisible: true
+    })
+  }
+
+  editEmployee = async (e) => {
     e.preventDefault();
     console.log("inside editEmployee");
+
+    try {
+      const editRequest = await fetch('http://localhost:9000/api/v1/employees/' + this.state.employeeToEdit._id, {
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify(this.state.employeeToEdit),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log(editRequest, ' <<<<<<<<<<<<<<<<<< 1. editRequest');
+
+      const editResponse = await editRequest.json()
+      console.log(editResponse, ' <<<<<<<<<< 2. Edit Response');
+
+      const editedEmployeeList = this.state.employees.map((employee) => {
+        if (employee._id === editResponse.data._id) {
+          employee = editResponse.data
+        }
+        return employee
+      })
+      console.log( editedEmployeeList, ' <<<<<<<<<< 3. editedEmployeeList');
+
+      this.setState({
+        employees: editedEmployeeList,
+        editModalVisible: false
+      })
+
+    } catch (err) {
+      console.dir(err)
+      throw Error('Edit request denied')
+    }
+
+
   }
 
   deleteEmployee = async (id, e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     try {
         const deletedEmployee = await fetch('http://localhost:9000/api/v1/employees/' + id, {
@@ -99,7 +161,7 @@ class App extends React.Component {
         console.log("deletedEmployeeResponse");
         console.log(deletedEmployeeResponse);
 
-      
+
         this.setState({
           employees: this.state.employees.filter((employee) => employee._id !== id)
         })
@@ -109,7 +171,7 @@ class App extends React.Component {
         console.log('Inside of deleteEmployee: ', err);
         return err
       }
-    
+
   }
 
    render() {
@@ -118,12 +180,14 @@ class App extends React.Component {
 
          <div className="App">
 
+           {/* CREATE: Sebastian */}
+           <CreateEmployee addEmployee={this.addEmployee} />
 
             {/* READ: Brant */}
-            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} editEmployee={this.editEmployee}/>
+            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} showEditModal={this.showEditModal}/>
 
-            {/* CREATE: Sebastian */}
-            <CreateEmployee addEmployee={this.addEmployee} />
+            {this.state.editModalVisible ? <EditEmployee employeeToEdit={this.state.employeeToEdit} editEmployee={this.editEmployee}  handleFormChange= {this.handleFormChange}/> : null}
+
 
          </div>
 

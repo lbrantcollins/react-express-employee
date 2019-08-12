@@ -16,7 +16,7 @@ const ListEmployees = (props) => {
 				<br />
 				<span>Salary: {employee.annualSalary}</span>
 				<br />
-				<button onClick={props.editEmployee.bind(null, employee._id)}>Edit</button>
+				<button onClick={props.showEditModal.bind(null, employee)}>Edit</button>
 				<button onClick={props.deleteEmployee.bind(null, employee._id)}>Delete</button>
 			</li>
 		);
