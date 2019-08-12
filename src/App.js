@@ -4,6 +4,7 @@ import ListEmployees from './ListEmployees';
 import EditEmployee from './EditEmployee'
 import Register from './Register'
 import Login from './Login'
+import Logout from './Logout'
 
 
 class App extends React.Component {
@@ -197,22 +198,23 @@ class App extends React.Component {
 
          <div className="App">
 
-         {this.state.loggedIn 
+         {this.state.loggedIn
 
           ? (
             <div>
-            <CreateEmployee addEmployee={this.addEmployee} />
+              <Logout loginStatus={this.loginStatus}/>
+              <CreateEmployee addEmployee={this.addEmployee} />
 
-            <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} showEditModal={this.showEditModal}/>
+              <ListEmployees employees={this.state.employees} deleteEmployee={this.deleteEmployee} showEditModal={this.showEditModal}/>
 
-            {this.state.editModalVisible ? <EditEmployee employeeToEdit={this.state.employeeToEdit} editEmployee={this.editEmployee}  handleFormChange= {this.handleFormChange}/> : null}
+              {this.state.editModalVisible ? <EditEmployee employeeToEdit={this.state.employeeToEdit} editEmployee={this.editEmployee}  handleFormChange= {this.handleFormChange}/> : null}
             </div>
             )
           :
 
           <div>
-          <Login loginStatus={this.loginStatus}/>
-          <Register loginStatus={this.loginStatus}/>
+            <Login loginStatus={this.loginStatus}/>
+            <Register loginStatus={this.loginStatus}/>
           </div>
 
         }
